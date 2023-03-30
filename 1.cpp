@@ -57,13 +57,7 @@ void solve(){
 }
 int32_t main()
 {
-   fast;
-    ll test;
-    cin>>test;
-    while (test--)
-    {
-       solve();
-    }
+   cout<<"hello";
 
    return 0;
 }
