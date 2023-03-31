@@ -66,7 +66,7 @@ void solve(){
     ll ans4=query(4, 5);
     ll a[6]={4, 8, 15, 16, 23, 42};
     ll x=720;
-    while (x--)
+   do
     {
         if (a[0]*a[1]==ans1&&a[1]*a[2]==ans2&&a[2]*a[3]==ans3&&a[3]*a[4]==ans4)
         {
@@ -76,12 +76,12 @@ void solve(){
            }
            cout<<endl;
             return;
-
            cout.flush();
           
         }
     }
-    next_permutation(a, a+6);
+    while(
+    next_permutation(a, a+6));
 }
 int32_t main()
 {
