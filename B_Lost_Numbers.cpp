@@ -52,30 +52,42 @@ ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprim
 void khatam(ll n){cout<<n<<endl;}
 void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
+ll query(ll l, ll r){
+    cout<<"?"<<" "<<l<<" "<<r<<endl;
+    ll x;
+    cin>>x;
+    return x;
+    cout.flush();
+}
 void solve(){
-    ll n;
-    cin>>n;
-    string s;
-    cin>>s;
-    char s = s[0];
-    f0(i, 1, n){
-        if (s[i]==s)
+    ll ans1=query(1, 2);
+    ll ans2=query(2, 3);
+    ll ans3=query(3, 4);
+    ll ans4=query(4, 5);
+    ll a[6]={4, 8, 15, 16, 23, 42};
+    ll x=720;
+    while (x--)
+    {
+        if (a[0]*a[1]==ans1&&a[1]*a[2]==ans2&&a[2]*a[3]==ans3&&a[3]*a[4]==ans4)
         {
-            
+           cout<<"! ";
+           f0(i, 0, 6){
+            cout<<a[i]<<" ";
+           }
+           cout<<endl;
+            return;
+
+           cout.flush();
+          
         }
-        else
-        {
-            
-        }
-        
-        
     }
+    next_permutation(a, a+6);
 }
 int32_t main()
 {
-   fast;
-    ll test;
-    cin>>test;
+   //fast;
+    ll test=1;
+    //cin>>test;
     while (test--)
     {
        solve();

@@ -52,30 +52,50 @@ ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprim
 void khatam(ll n){cout<<n<<endl;}
 void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
+ll query(ll l, ll r){
+    cout<<"?"<< " "<<l<< " "<<r<<endl;
+    ll x;
+    cin>>x;
+    return x;
+    cout.flush();
+}
 void solve(){
-    ll n;
-    cin>>n;
-    string s;
-    cin>>s;
-    char s = s[0];
-    f0(i, 1, n){
-        if (s[i]==s)
+    ll n, t, k;
+    cin>>n>>t>>k;
+    ll low=1, high=n, ans=-1;
+    while (high>=low)
+    {
+        ll mid = (low+high)/2;
+        
+        ll p = query(1, mid);
+        ll z = mid-p;
+        if (z>=k)
         {
+             ans=mid;
+             high=mid-1;
             
         }
-        else
+        else  
         {
+            low = mid+1;
+          // high=mid-1;
             
         }
-        
-        
+       
+
     }
+    // if (low-2==-1)
+    // {
+    //     cout<<"!"<<" "<<1<<endl;
+    // }
+    
+    cout<<"!"<<" "<<high+1<<endl;
 }
 int32_t main()
 {
-   fast;
-    ll test;
-    cin>>test;
+   //fast;
+    ll test=1;
+    //cin>>test;
     while (test--)
     {
        solve();
