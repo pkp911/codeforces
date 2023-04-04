@@ -52,44 +52,17 @@ ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprim
 void khatam(ll n){cout<<n<<endl;}
 void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
-ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
 void solve(){
-   ll n, c, d;
-   cin>>n>>c>>d;
-   map<ll, ll>m_p;
-   f0(i, 0, n){
-      ll x;
-      cin>>x;
-      m_p[x]++;
-   }
-   vector<ll>v;
-   for (auto &&i : m_p)
-
-   {
-      v.push_back(i.first);
-   }
-   
-   //all(v);
-   //ll ans=0;
-   
-   //khatamsab(v);
-//   v.resize(m = unique(v.begin(), v.end()) - v.begin());
-//   khatamsab(v);
-  //khatamsab(v1);
-   ll ans =c*(n-v.size());
-   ll need = LLONG_MAX;
-   f0(i, 0, v.size()){
-        need = min(need, (v.size()-i-1)*c+(d*(v[i]-i-1)));
-   }
-   ans = min(ans+need, c*n+d);
-   khatam(ans);
-
-   
+    ll n, m;
+    cin>>n>>m;
+    vector<ll>v(n);
+    aaja(v);
+    
 }
 int32_t main()
 {
    fast;
-    ll test=1;
+    ll test;
     cin>>test;
     while (test--)
     {
