@@ -57,26 +57,29 @@ ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) 
 void solve(){
     ll n, m;
     cin>>n>>m;
-    vector<ll>v1(n);
-    vector<ll>v2(m);
-    aaja(v1);
-    aaja(v2);
+    vector<ll>v(n);
+    aaja(v);
     ll i=0, j=0, ans=0;
+    unordered_map<ll, ll>m_p;
     while (j<n)
     {
-        while (i<m&&v1[j]<=v2[i])
+        m_p[v[j]]++;
+        while (i<=j&&m_p.size()>m)
         {
-            if(v1[i]==v2[j]){
-                ans++;
+            m_p[v[i]]--;
+            if(m_p[v[i]]<=0){
+                m_p.erase(v[i]);
             }
             i++;
         }
+        ans+=(j-i+1);
         j++;
-        //i=0;
+
+        
+
         
     }
     khatam(ans);
-    
     
 }
 int32_t main()

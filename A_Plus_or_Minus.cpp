@@ -55,35 +55,24 @@ vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(),
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
 void solve(){
-    ll n, m;
-    cin>>n>>m;
-    vector<ll>v1(n);
-    vector<ll>v2(m);
-    aaja(v1);
-    aaja(v2);
-    ll i=0, j=0, ans=0;
-    while (j<n)
+    ll a, b, c;
+    cin>>a>>b>>c;
+    if (a+b==c)
     {
-        while (i<m&&v1[j]<=v2[i])
-        {
-            if(v1[i]==v2[j]){
-                ans++;
-            }
-            i++;
-        }
-        j++;
-        //i=0;
-        
+        cout<<"+"<<endl;
     }
-    khatam(ans);
+    else
+    {
+        cout<<"-"<<endl;
+    }
     
     
 }
 int32_t main()
 {
    fast;
-    ll test=1;
-    //cin>>test;
+    ll test;
+    cin>>test;
     while (test--)
     {
        solve();
