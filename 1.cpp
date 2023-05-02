@@ -3,6 +3,7 @@ using namespace std;
 #define ll long long
 const ll N = 1e5 + 7;
 const ll M = 1e7 + 7;
+const ll mod=1e9+7;
 ll arr[N];
 ll P[M];
 #define PI 3.141592653589793238462
@@ -54,14 +55,74 @@ void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(), v.end()) - v.begin());return v;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
+const int MOD = 1e9 + 7;
+
+long long get_hash(string s) {
+    int n = s.length();
+    long long h = 0;
+    for (int i = 0; i < n; i++) h = (h * 31 + (s[i] - 'a' + 1)) % MOD;
+    return h;
+}
+
+ll rabin_karp(string s, string t) {
+    ll n = s.length(), m =t.length();
+   ll p = 1;
+    ll ct=0;
+    for (int i = 0; i < m - 1; i++) p = (p * 31) % MOD;
+    long long ht = get_hash(t);
+    long long hs = get_hash(s.substr(0, m));
+    if (hs == ht) ct++;
+    for (int l = 1, r = m; r < n; l++, r++) {
+        ll del = ((s[l - 1] - 'a' + 1) * p) % MOD;
+        ll add = s[r] - 'a' + 1;
+        hs = ((hs - del + MOD) * 31 + add) % MOD;
+        if (hs == ht) ct++;
+    }
+    return ct;
+}
 void solve(){
-    
+  string s;
+  cin>>s;
+  vector<ll>prefix(s.length(), 0);
+  vector<ll>suffix(s.length(), 0);
+  vector<ll>power(s.length(), 1);
+  f0(i, 1, s.length()){
+    power[i]=(power[i-1]*31)%mod;
+  }
+  
+  prefix[0]=s[0]-'a'+1;
+  
+
+  f0(i, 1, s.length()){
+    prefix[i]=((prefix[i-1]+((s[i]-'a'+1))*power[i])%mod)%mod;
+  }
+
+  suffix[s.length()-1]=s[s.length()-1]-'a'+1;
+  f1(i, s.length()-2, 0){
+    suffix[i]=((((suffix[i+1]*31)%mod)+s[i]-'a'+1)%mod);
+
+  }
+  f0(i, 0, s.length()){
+   // cout<<prefix[i]<<" "<<suffix[i]<<endl;
+      if (prefix[i]==suffix[s.length()-1-i])
+      {
+        if (i+1==s.length())
+        {
+            return;
+        }
+        
+        cout<<i+1<<" ";
+      }
+      
+  }
+  cout<<endl;
+ 
 }
 int32_t main()
 {
    fast;
-    ll test;
-    cin>>test;
+    ll test=1;
+    //cin>>test;
     while (test--)
     {
        solve();

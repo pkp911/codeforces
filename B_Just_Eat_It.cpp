@@ -3,7 +3,6 @@ using namespace std;
 #define ll long long
 const ll N = 1e5 + 7;
 const ll M = 1e7 + 7;
-const ll mod = 1e9+7;
 ll arr[N];
 ll P[M];
 #define PI 3.141592653589793238462
@@ -55,41 +54,48 @@ void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(), v.end()) - v.begin());return v;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
-
-long long gcd(long long a, long long b) {
-    if (b == 0) {
-        return a;
-    }
-    return gcd(b, a % b);
-}
-long long get_hash(string s) {
-  ll n = s.length();
-  ll h = 0;
-  f0(i, 0, n){
-    h = ((h*31)+s[i]-'a'+1)%mod;
-  }  
-  return h;  
-}
-
 void solve(){
-    ll n, m;
-    cin>>n>>m;
-    ll x1, y1, x2, y2;
-    cin>>x1>>y1>>x2>>y2;
-    int ans1=4,ans2=4;
-		if(x1==1)ans1--;
-		if(x1==n)ans1--;
-		if(y1==1)ans1--;
-		if(y1==m)ans1--;
-		if(x2==1)ans2--;
-		if(x2==n)ans2--;
-		if(y2==1)ans2--;
-		if(y2==m)ans2--;
-        khatam(min(ans1, ans2));
-    
-    
-    
-    
+    ll n;
+    cin>>n;
+    vector<ll>v(n);
+    aaja(v);
+    ll cur_sum=0, max_sum=-1e18, total_sum=0, ct1=0, ct2=0;
+    f0(i, 0, n){
+        if(v[i]<0){
+            ct1++;
+        }
+        total_sum+=v[i];
+        cur_sum+=v[i];
+        max_sum = (max_sum, cur_sum);
+        
+        
+        if(cur_sum<=0){
+            ct2++;
+            cur_sum=0;
+        }
+
+    }
+    ll cur_sum1=0, max_sum1=-1e18, ct3=0;
+    f1(i, n-1, 0){
+       
+       // total_sum+=v[i];
+        cur_sum1+=v[i];
+        max_sum1 = (max_sum1, cur_sum1);
+        
+        
+        if(cur_sum1<=0){
+            ct3++;
+            cur_sum1=0;
+        }
+
+    }
+    if(ct2>0||ct3>0){
+        cout<<"NO"<<endl;
+        return;
+    }
+    cout<<"YES"<<endl;
+   
+
 }
 int32_t main()
 {

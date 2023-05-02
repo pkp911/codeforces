@@ -53,16 +53,27 @@ void khatam(ll n){cout<<n<<endl;}
 void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
-vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(), v.end()) - v.begin());return v;}
+vector<ll> identifier(vector<ll>v){ll m=0;v.resize(m = unique(v.begin(), v.end()) - v.begin());return v;}
 void solve(){
    ll n, c, d;
    cin>>n>>c>>d;
    vector<ll>v(n);
    aaja(v);
+   all(v);
+   ll m = 0;
+   identifier(v);
+  // v.resize(m = unique(v.begin(), v.end()) - v.begin());
   khatamsab(v);
-  identifier(v);
-  khatamsab(v);
-  
+   
+   //khatamsab(v);
+   ll ans = (n-m)*c;
+   ll need =n*c+d, add=0, remove=0;
+   for (int i = 1; i <=v.size(); i++)  {
+       add = (v[i-1]-i)*d;
+       remove = (v.size()-i)*c;
+       need = min(need, add+remove+ans);
+   }
+   khatam(need);
    
 }
 int32_t main()

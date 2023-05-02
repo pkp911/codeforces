@@ -3,7 +3,6 @@ using namespace std;
 #define ll long long
 const ll N = 1e5 + 7;
 const ll M = 1e7 + 7;
-const ll mod = 1e9+7;
 ll arr[N];
 ll P[M];
 #define PI 3.141592653589793238462
@@ -55,47 +54,47 @@ void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(), v.end()) - v.begin());return v;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
-
-long long gcd(long long a, long long b) {
-    if (b == 0) {
-        return a;
-    }
-    return gcd(b, a % b);
-}
-long long get_hash(string s) {
-  ll n = s.length();
-  ll h = 0;
-  f0(i, 0, n){
-    h = ((h*31)+s[i]-'a'+1)%mod;
-  }  
-  return h;  
-}
-
 void solve(){
-    ll n, m;
-    cin>>n>>m;
-    ll x1, y1, x2, y2;
-    cin>>x1>>y1>>x2>>y2;
-    int ans1=4,ans2=4;
-		if(x1==1)ans1--;
-		if(x1==n)ans1--;
-		if(y1==1)ans1--;
-		if(y1==m)ans1--;
-		if(x2==1)ans2--;
-		if(x2==n)ans2--;
-		if(y2==1)ans2--;
-		if(y2==m)ans2--;
-        khatam(min(ans1, ans2));
-    
-    
-    
-    
+    ll m,n;
+    cin>>m>>n;
+    ll ct=0;
+    vector<ll>v(m);
+    aaja(v);
+    all(v);
+    f1(i, v.size()-1, 0){
+        ll q = m-v[i];
+        if (q<v[0])
+        {
+            //cout<<v[i]<<" "<<v[0]<<"gijgo"<<endl;
+            ct++;
+             v.erase(v.end()-1, v.end());
+             //khatamsab(v);
+             continue;
+
+        }
+        
+        if (lower_bound(v.begin(), v.end(), q)!=v.end())
+        {
+            
+            if (lower_bound(v.begin(), v.end()-1, q)!=upper_bound(v.begin(), v.end()-1, q))
+            {
+               // cout<<v[i]<<" "<<"690642"<<endl;
+                ll index = lower_bound(v.begin(), v.end()-1, q)-v.begin();
+                v.erase(v.begin()+index, v.begin()+index);
+                v.erase(v.end()-1, v.end());
+                ct++;
+            }
+            
+        }
+        
+    }
+    khatam(ct);
 }
 int32_t main()
 {
    fast;
-    ll test;
-    cin>>test;
+    ll test=1;
+   // cin>>test;
     while (test--)
     {
        solve();

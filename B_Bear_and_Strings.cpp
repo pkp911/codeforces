@@ -3,7 +3,7 @@ using namespace std;
 #define ll long long
 const ll N = 1e5 + 7;
 const ll M = 1e7 + 7;
-const ll mod = 1e9+7;
+const ll MOD = 1e9+7;
 ll arr[N];
 ll P[M];
 #define PI 3.141592653589793238462
@@ -55,47 +55,57 @@ void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(), v.end()) - v.begin());return v;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
-
-long long gcd(long long a, long long b) {
-    if (b == 0) {
-        return a;
-    }
-    return gcd(b, a % b);
-}
 long long get_hash(string s) {
-  ll n = s.length();
-  ll h = 0;
-  f0(i, 0, n){
-    h = ((h*31)+s[i]-'a'+1)%mod;
-  }  
-  return h;  
+    int n = s.length();
+    long long h = 0;
+    for (int i = 0; i < n; i++) h = (h * 31 + (s[i] - 'a' + 1)) % MOD;
+    return h;
 }
 
+vector<ll> rabin_karp(string s, string t) {
+    ll n = s.length(), m =t.length();
+   ll p = 1;
+    ll ct=0;
+    vector<ll>v1;
+    for (int i = 0; i < m - 1; i++) p = (p * 31) % MOD;
+    long long ht = get_hash(t);
+    long long hs = get_hash(s.substr(0, m));
+    if (hs == ht) {
+        v1.push_back(0);
+    }
+    for (ll l = 1, r = m; r < n; l++, r++) {
+        ll del = ((s[l - 1] - 'a' + 1) * p) % MOD;
+        ll add = s[r] - 'a' + 1;
+        hs = ((hs - del + MOD) * 31 + add) % MOD;
+        if (hs == ht){
+            v1.push_back(l);
+        }
+    }
+  // khatamsab(v1);
+    
+    return v1;
+}
 void solve(){
-    ll n, m;
-    cin>>n>>m;
-    ll x1, y1, x2, y2;
-    cin>>x1>>y1>>x2>>y2;
-    int ans1=4,ans2=4;
-		if(x1==1)ans1--;
-		if(x1==n)ans1--;
-		if(y1==1)ans1--;
-		if(y1==m)ans1--;
-		if(x2==1)ans2--;
-		if(x2==n)ans2--;
-		if(y2==1)ans2--;
-		if(y2==m)ans2--;
-        khatam(min(ans1, ans2));
-    
-    
-    
-    
+    string s1, s2 = "bear";
+    cin>>s1;
+    vector<ll>v1 = rabin_karp(s1, s2);
+    ll sum=0;
+    ll prev = -1;
+    f0(i, 0, v1.size()){
+        ll left = v1[i]-prev;
+        ll right = (s1.length()-v1[i]-3);
+        sum+=(left*right);
+        prev = v1[i];
+    }
+     
+    khatam(sum);
+   // khatamsab(v1);
 }
 int32_t main()
 {
    fast;
-    ll test;
-    cin>>test;
+    ll test=1;
+   // cin>>test;
     while (test--)
     {
        solve();
