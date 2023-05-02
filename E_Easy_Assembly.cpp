@@ -55,25 +55,33 @@ vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(),
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
 void solve(){
-    ll n, m;
-    cin>>n>>m;
-    vector<ll>v(n);
-    aaja(v);
-    all(v);
-    reverse(v.begin(), v.end());
-    ll ans=0;
-     if(v[0]>(m/n)){
-        v[0]-=(m/n);
-        ans+=(m/n);
-     }
-     f0(i, 1, n){
-        if (v[i]>(m/n))
-        {
-            ans++;
+    ll n;
+    cin>>n;
+    vector<vector<ll>>towers(n);
+    f0(i, 0, n)
+    {
+        ll x;
+        cin>>x;
+        vector<ll>l1;
+        f0(i, 0, x){
+            ll y1;
+            cin>>y1;
+            l1.push_back(y1);
         }
+        towers.push_back(l1);
+        l1.clear();
+    }
+    all(towers);
+    f0(i, 0, n){
         
-     }
-     khatam(ans);
+            if (towers[i][0]>=towers[i+1][]&&towers[i][])
+            {
+                
+            }
+            
+    }
+
+
     
 }
 int32_t main()
