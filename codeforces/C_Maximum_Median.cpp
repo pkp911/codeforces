@@ -52,43 +52,37 @@ ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprim
 void khatam(ll n){cout<<n<<endl;}
 void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
-bool check(vector<ll>v, ll mid, ll x){
-   ll n = v.size();
-   ll opsreq=0;
-   f0(i, n/2, n){
-    opsreq+=(max(0ll, mid-v[i]));
+bool check(vector<ll>v,ll m, ll mid){
+    ll ops=0;
+    f0(i, (v.size()/2), v.size()){
+        ops+=max(0ll, mid-v[i]);
+    }
 
-   }
-   return opsreq<=x;
+    return ops<=m;
 }
-void solve(){
+void solve (){
     ll n, m;
     cin>>n>>m;
     vector<ll>v(n);
     aaja(v);
     all(v);
-    ll ans=0;
-    ll low=v[(n)/2],  high = low+m;
+     ll low = v[(n)/2], high=v[(n)/2]+m;
     while (high-low>1)
-
     {
         ll mid = (low+high)/2;
-        if (check(v, mid, m))
-        {
-           low = mid;
+        if(check(v, m, mid)){
+            low=mid;
         }
         else
         {
-            high = mid-1;
+            high=mid-1;
         }
-                
         
     }
-   // cout<<
-    if (check(v, high, m))
+   // cout<<high<<" "<<low<<endl;
+    if (check(v, m, high))
     {
-       khatam(high);
-        
+        khatam(high);
     }
     else
     {
@@ -96,8 +90,6 @@ void solve(){
     }
     
     
-
-
 
 }
 int32_t main()

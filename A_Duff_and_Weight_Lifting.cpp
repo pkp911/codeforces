@@ -54,46 +54,30 @@ void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(), v.end()) - v.begin());return v;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
-void solve() {
-    int  n;
-    cin >> n;
-    vector<vector<int>> v;
-    vector<int> arr;
-    for(int  i = 0; i<n; i++) {
-        
-        int m;
-        cin >> m;
-        vector<int> sub(m);
-        for(int i = 0; i<m; i++) {
-            cin >> sub[i];
-            arr.push_back(sub[i]);
-        }
-        v.push_back(sub);
-    }
-    sort(arr.begin(), arr.end());
+void solve(){
+    ll n;
+    cin>>n;
+    ll arr[1000020];
+   f0(i, 0, n){
+    ll x;
+    cin>>x;
+    arr[x]++;
+   }
+   ll ans=0;
+   f0(i, 0, 1000019){
+       arr[i+1]+=arr[i]/2;
+       arr[i]%=2;
+       ans+=arr[i];
+   }
+   khatam(ans);
 
-
-    int split = n;
-    for(int i = 0; i<n; i++) {
-        int m = v[i].size();
-        for(int j = 0; j+1<m; j++) {
-            int k = lower_bound(arr.begin(), arr.end(), v[i][j]) - arr.begin();
-            if(k == arr.size()) {
-                split++;
-            }
-            else if(arr[k+1] != v[i][j+1]) {
-                split++;
-            }
-        }
-    }
-    cout << (split-n) << " " << (split-1) << endl;
 
 }
 int32_t main()
 {
    fast;
     ll test=1;
-   // cin>>test;
+    //cin>>test;
     while (test--)
     {
        solve();
