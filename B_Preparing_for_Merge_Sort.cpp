@@ -59,43 +59,44 @@ void solve(){
     cin>>n;
     vector<ll>v(n);
     aaja(v);
-    set<pair<ll, ll>>st;
-    f0(i, 0, n){
-        st.insert({i, v[i]});
-    }
-    ll prev = LLONG_MIN;
-    while (st.size()>0)
+    vector<vector<ll>>req;
+    for (int i = 0; i <n; i++)
     {
-        for (auto it = st.begin(); it!=st.end(); )
+        ll low=0, high=req.size();
+        while (high!=low)
         {
-           auto x = *it;
-           if (x.second>prev)
-           {
-               cout<<x.second<<" ";
-               prev = x.second;
-               if (it!=st.end())
-               {
-                  it++;
-                  st.erase(x);
-               }
-               
-           }
-           else
-           {
-            it++;
-           }
-           
-           
-           
+            ll mid=(low+high)/2;
+            if (req[mid].back()<v[i]){
+                high=mid;
+            }
+            else {
+                low=mid+1;
+            }
+            
+        }
+        if (low==req.size())
+        {
+            req.push_back({v[i]});
+        }
+        else
+        {
+            req[low].push_back(v[i]);
+        }
+        
+        
+        
+    }
+    for (int i = 0; i < req.size(); i++)
+    {
+        for (int j = 0; j < req[i].size(); j++)
+        {
+            cout<<req[i][j]<<" ";
         }
         cout<<endl;
-        prev = LLONG_MIN;
-        
         
     }
     
-
-   
+    
 }
 int32_t main()
 {
