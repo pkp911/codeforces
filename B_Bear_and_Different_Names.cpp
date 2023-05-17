@@ -54,41 +54,92 @@ void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(), v.end()) - v.begin());return v;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
-ll query(ll l, ll r){
-    
-    cout<<"?"<<" "<<l<<" "<<r<<endl;
-    ll x;
-    cin>>x;
-    return x;
-
-}
 void solve(){
-    ll n, m, t;
-    cin>>n>>t>>m;
-    ll low=1, high=n, ans=0;
-    while (high>=low)
-    {
-        ll mid = (high+low)/2;
-        ll p = query(1, mid);
-        ll z = mid-p;
-        if(z>=m){
-            high=mid-1;
-            ans=mid;
+    ll m, n;
+    cin>>m>>n;
+    vector<string>v(m+1-n);
+    f0(i, 0, m+1-n){
+        cin>>v[i];
+    }
+    vector<string>v1;
+    string s1="A";
+   ll  ans=0, ct=0;
+   //cout<<char('a'+25)<<endl;
+    f0(i, 0, n-1){
+        
+         if (ans==25)
+         {
+             s1.push_back('a'+ans);
+            ans=0;
+            //cout<<char('a'+ans)<<endl;
+           
+             //s1.push_back('a'+ans);
+              v1.push_back(s1);
+
+            ct++;
+         }
+         else
+         {
+             s1.push_back('a'+ans);
+            v1.push_back(s1);
+            s1.erase(1+ct, 1);
+             ans++;
+         }   
+    }
+    ll ans1=n-1, ct1=0;
+
+    f0(i, 0, v.size()){
+       // cout<<'a'+ ans1<<endl;
+    //    if (i==1)
+    //    {
+    //     cout<<ans1<<endl;
+    //    }
+       
+       if (ans1>25)
+          {
+            ans1-=25;
+          }
+            
+        if (v[i]=="YES")
+        {
+          
+            if (ans1==25||ans1==48)
+            {
+               
+                 s1.push_back('a'+ans1); 
+                ans1=0;
+                ct1=1;
+                
+                 //cout<<s1<<" ";
+                 v1.push_back(s1);
+            }
+            else
+            {
+                 s1.push_back('a'+ans1);
+                  v1.push_back(s1);
+                s1.erase(1+ct1, 1);
+                ans1++;
+            }
+        // s1.erase(1, 1);
         }
         else
         {
-            low=mid+1;
-        }
- 
+            v1.push_back(v1[i]);
+
+        }  
     }
-    cout<<"!"<<" "<<ans<<endl;
+   // cout<<ct<<" "<<ct1<<endl;
+    f0(i, 0, v1.size()){
+        cout<<v1[i]<<" ";
+    }
+    cout<<endl;
     
 }
 int32_t main()
 {
-   //fast;
+   fast;
     ll test=1;
-    //cin>>test;
+   // cin>>test;
     while (test--)
     {
        solve();

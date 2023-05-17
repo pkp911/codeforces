@@ -54,41 +54,48 @@ void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(), v.end()) - v.begin());return v;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
-ll query(ll l, ll r){
-    
-    cout<<"?"<<" "<<l<<" "<<r<<endl;
-    ll x;
-    cin>>x;
-    return x;
-
-}
 void solve(){
-    ll n, m, t;
-    cin>>n>>t>>m;
-    ll low=1, high=n, ans=0;
-    while (high>=low)
+    ll n;
+    cin>>n;
+    vector<ll>v(n);
+    aaja(v);
+    vector<ll>v2(n);
+    aaja(v2);
+    vector<ll>v1(n);
+    v1=v;
+    all(v1);
+    if (v==v1)
     {
-        ll mid = (high+low)/2;
-        ll p = query(1, mid);
-        ll z = mid-p;
-        if(z>=m){
-            high=mid-1;
-            ans=mid;
+       cout<<"Yes"<<endl;
+       return;
+    }
+    ll ct0=0, ct1=0;
+    
+    f0(i, 0, n){
+        if (v2[i]==0)
+        {
+            ct0++;
         }
         else
         {
-            low=mid+1;
+            ct1++;
         }
- 
+        
+        
     }
-    cout<<"!"<<" "<<ans<<endl;
+    if (ct1>0&&ct0>0)
+    {
+        cout<<"Yes"<<endl;
+        return;
+    }
+    cout<<"No"<<endl;
     
 }
 int32_t main()
 {
-   //fast;
-    ll test=1;
-    //cin>>test;
+   fast;
+    ll test;
+    cin>>test;
     while (test--)
     {
        solve();

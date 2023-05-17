@@ -54,39 +54,53 @@ void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(), v.end()) - v.begin());return v;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
-ll query(ll l, ll r){
-    
-    cout<<"?"<<" "<<l<<" "<<r<<endl;
-    ll x;
-    cin>>x;
-    return x;
-
-}
 void solve(){
-    ll n, m, t;
-    cin>>n>>t>>m;
-    ll low=1, high=n, ans=0;
-    while (high>=low)
-    {
-        ll mid = (high+low)/2;
-        ll p = query(1, mid);
-        ll z = mid-p;
-        if(z>=m){
-            high=mid-1;
-            ans=mid;
+    ll n, m;
+    cin>>n>>m;
+    vector<ll>v(n);
+    aaja(v);
+    vector<ll>ans;
+    ans.push_back(v[0]);
+    f0(i, 1, n){
+        if (v[i]!=ans[ans.size()-1])
+        {
+            ans.push_back(v[i]);
+        }
+        
+    }
+    
+    map<ll, ll>m_p;
+    m_p[ans[0]]++;
+    f0(i, 1, ans.size()-1 ){
+        if (ans[i-1]==ans[i+1])
+        {
+             m_p[ans[i]]+=2;
+            // i++;
         }
         else
         {
-            low=mid+1;
-        }
- 
+            m_p[ans[i]]++;
+            //i++;
+        }  
     }
-    cout<<"!"<<" "<<ans<<endl;
+    m_p[ans[ans.size()-1]]++;
+    ll ans1=0, ans2=0;
+    for (auto &&i : m_p)
+    {
+        if (i.second>ans2)
+        {
+            ans2=i.second;
+            ans1=i.first;
+        }
+        
+    }
+    cout<<ans1<<endl;
+   
     
 }
 int32_t main()
 {
-   //fast;
+   fast;
     ll test=1;
     //cin>>test;
     while (test--)

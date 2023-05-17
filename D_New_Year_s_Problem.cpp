@@ -65,6 +65,11 @@ void solve(){
         }
         v.push_back(v1);
     }
+    for (int i = 0; i < n; i++)
+    {
+        
+    }
+    
 }
 int32_t main()
 {

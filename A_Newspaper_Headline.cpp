@@ -54,41 +54,57 @@ void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(), v.end()) - v.begin());return v;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
-ll query(ll l, ll r){
-    
-    cout<<"?"<<" "<<l<<" "<<r<<endl;
-    ll x;
-    cin>>x;
-    return x;
-
-}
 void solve(){
-    ll n, m, t;
-    cin>>n>>t>>m;
-    ll low=1, high=n, ans=0;
-    while (high>=low)
-    {
-        ll mid = (high+low)/2;
-        ll p = query(1, mid);
-        ll z = mid-p;
-        if(z>=m){
-            high=mid-1;
-            ans=mid;
+    string s1, s2;
+    cin>>s1>>s2;
+    string x = s1;
+   // ll ans=0;
+    ll ct1=0;
+    map<char, ll>m_p;
+    vector<vector<ll>>v(26);
+    ll lastindex=-1, ans=1;
+     f0(i, 0, s1.length()){
+        
+       // cout<<s1[i]-'a'<<endl;
+      v[s1[i]-'a'].push_back(i);
+       
+    }
+    f0(i, 0, s1.length()){
+        m_p[s1[i]]++;
+       
+    }
+    f0(i, 0, s2.length()){
+        if (m_p[s2[i]]==0)
+        {
+            cout<<-1<<endl;
+            return;
+        }
+        
+    }
+
+    f0(i, 0, s2.length()){
+        ll t = s2[i]-'a';
+        auto it = upper_bound(v[t].begin(), v[t].end(), lastindex);
+        if (it==v[t].end())
+        {
+            lastindex=v[t][0];
+            ans++;
         }
         else
         {
-            low=mid+1;
+            lastindex=*it;
         }
- 
+        
+        
+        
     }
-    cout<<"!"<<" "<<ans<<endl;
-    
+    khatam(ans);
 }
 int32_t main()
 {
-   //fast;
+   fast;
     ll test=1;
-    //cin>>test;
+   // cin>>test;
     while (test--)
     {
        solve();

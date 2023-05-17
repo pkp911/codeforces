@@ -54,39 +54,67 @@ void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(), v.end()) - v.begin());return v;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
-ll query(ll l, ll r){
+ll n, m;
+vector<ll>v(2e5);
+bool check(ll mid){
+   
     
-    cout<<"?"<<" "<<l<<" "<<r<<endl;
-    ll x;
-    cin>>x;
-    return x;
-
 }
 void solve(){
-    ll n, m, t;
-    cin>>n>>t>>m;
-    ll low=1, high=n, ans=0;
-    while (high>=low)
+    cin>>n>>m;
+    aaja(v);
+     if (m>=n)
     {
-        ll mid = (high+low)/2;
-        ll p = query(1, mid);
-        ll z = mid-p;
-        if(z>=m){
-            high=mid-1;
-            ans=mid;
-        }
-        else
-        {
-            low=mid+1;
-        }
- 
+        khatam(v[n-1]);
+        return;
+       
     }
-    cout<<"!"<<" "<<ans<<endl;
+    else if(n==2*m)
+    {
+        //cout<<1<<endl;
+        ll ans=0;
+        f0(i, 0, (n/2)){
+            ans=max(ans, v[i]+v[n-i-1]);
+            //i++;
+
+        }
+        cout<<ans<<endl;
+        return ;
+
+    }
+    
+    else
+    {
+        ll ans=0;
+        ll p = 0;
+        if ((2*m-n)%2!=0 )
+        {
+            p=1;
+        }
+        
+        f0(i, 0, n-m){
+           // cout<<
+            ans=max(ans, v[i]+v[2*(n-m)-i-1]);
+           // i++;
+
+        }
+        
+        f0(i, 2*(n-m), n){
+            ans=max(ans, v[i]);
+        }
+        cout<<ans<<endl;
+        return ;
+
+    }
+    
+    
+    
+    
     
 }
 int32_t main()
 {
-   //fast;
+   fast;
     ll test=1;
     //cin>>test;
     while (test--)

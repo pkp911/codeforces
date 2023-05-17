@@ -64,7 +64,7 @@ long long get_hash(string s) {
     return h;
 }
 
-ll ctofstring(string s, string t) {
+ll rabin_karp(string s, string t) {
     ll n = s.length(), m =t.length();
    ll p = 1;
     ll ct=0;
@@ -83,6 +83,19 @@ ll ctofstring(string s, string t) {
 void solve(){
   string s;
   cin>>s;
+  map<char, ll>m_p;
+  f0(i, 0, s.length()){
+    m_p[s[i]]++;
+  }
+  if (m_p.size()==1&&m_p[s[0]]>2)
+  {
+      f0(i, 0, m_p[s[0]]-2){
+        cout<<s[0];
+      }
+      cout<<endl;
+      return;
+  }
+  
   vector<ll>prefix(s.length(), 0);
   vector<ll>suffix(s.length(), 0);
   vector<ll>power(s.length(), 1);
@@ -104,6 +117,7 @@ void solve(){
   }
   vector<pair<ll, string>>carry;
   f0(i, 0, s.length()){
+   // cout<<prefix[i]<<" "<<suffix[i]<<endl;
       if (prefix[i]==suffix[s.length()-1-i])
       {
         if (i+1==s.length())
@@ -114,20 +128,21 @@ void solve(){
         {
            carry.push_back({i, s.substr(0, i+1)});
         } 
+       // cout<<i+1<<" ";
       }   
   }
   
   vector<string>xe1;
   f0(i, 0, carry.size()){
     string ans = s.substr(1, s.length()-2 );
-    //cout<<carry[i].second<<" "<<ans<<endl;
-    
      if (isSubstring( carry[i].second, ans))
      {
          xe1.push_back(carry[i].second);
      }   
   }
-  //cout<<xe1.size()<<endl;
+  carry.clear();
+
+
   if (xe1.size()==0)
   {
     cout<<"Just a legend"<<endl;
@@ -135,12 +150,6 @@ void solve(){
   }
   sort(xe1.begin(), xe1.end());
   cout<<xe1[xe1.size()-1]<<endl;
-  // for (int i = 0; i < xe1.size(); i++)
-  // {
-  //   cout<<xe1[i]<<" ";
-  // }
-  //cout<<endl;
- 
 }
 int32_t main()
 {

@@ -57,14 +57,18 @@ ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) 
 void solve(){
     ll n;
     cin>>n;
-    ll arr[1000020];
+    vector<ll>arr(1e7, 0);
+    // ll arr[200020];f0(i, 0, 200020){
+    //     arr[i]=0;
+    // }
+
    f0(i, 0, n){
     ll x;
     cin>>x;
     arr[x]++;
    }
    ll ans=0;
-   f0(i, 0, 1000019){
+   f0(i, 0, 1e7-1){
        arr[i+1]+=arr[i]/2;
        arr[i]%=2;
        ans+=arr[i];

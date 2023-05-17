@@ -54,41 +54,59 @@ void khatamsab(vector<ll>v){f0(i, 0, v.size()){cout<<v[i]<<" ";}cout<<endl;}
 vector<ll> identifier(vector<ll>v){all(v);int m=0;v.resize(m = unique(v.begin(), v.end()) - v.begin());return v;}
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll xmodn(string str, ll n) {ll len = str.length();ll num, rem = 0;f0(i, 0, len) { num = rem * 10 + (str[i] - '0');rem = num % n;}return rem;   }
-ll query(ll l, ll r){
+ll rec2(ll n){
+    ll ct=0;
+    while (n>1)
+    {
+        n/=2;
+        ct++;
+    }
+    return ct;
     
-    cout<<"?"<<" "<<l<<" "<<r<<endl;
-    ll x;
-    cin>>x;
-    return x;
-
 }
 void solve(){
-    ll n, m, t;
-    cin>>n>>t>>m;
-    ll low=1, high=n, ans=0;
-    while (high>=low)
-    {
-        ll mid = (high+low)/2;
-        ll p = query(1, mid);
-        ll z = mid-p;
-        if(z>=m){
-            high=mid-1;
-            ans=mid;
-        }
-        else
-        {
-            low=mid+1;
-        }
- 
+    string x;
+    cin>>x;
+    ll n = x.length();
+    vector<vector<ll>> v(26);
+   // ll ans = LLONG_MAX;
+    map<char, vector<ll>>m_p;
+    ll maxi=0, ans=LLONG_MAX;
+    f0(i, 0, x.length()){
+       v[x[i]-2*'0'-1].push_back(i);
     }
-    cout<<"!"<<" "<<ans<<endl;
+    
+    f0(i, 0, v.size()){
+        if (v[i].size()>0)
+        {
+      
+         maxi=rec2(v[i][0]);
+        // cout<<maxi<<endl;
+        f0(j, 1, v[i].size()-1){
+           
+            maxi=max(maxi, rec2(v[i][j]-v[i][j-1]));
+            //cout<<maxi<<" ";
+        }
+       // cout<<endl;
+        maxi=max(maxi, rec2(x.length()-v[i][v[i].size()-1]));
+       // cout<<maxi<<endl;
+
+        ans=min(ans, maxi);
+        }
+       
+    }
+    cout<<ans<<endl;
+   // v.clear();
+  // m_p.clear();
+
+   
     
 }
 int32_t main()
 {
    //fast;
-    ll test=1;
-    //cin>>test;
+    ll test;
+    cin>>test;
     while (test--)
     {
        solve();

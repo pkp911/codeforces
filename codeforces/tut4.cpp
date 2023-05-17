@@ -1,23 +1,36 @@
 #include <bits/stdc++.h>
-#define ll long long
-int main()
-{
-   ll n;
-   cin>>n;
-   vector<ll>v(n),x;
-   for(int i=0;i<n;i++){
-      cin>>v[i];
-   }
-   ll xor=0;
-   for(int i=0;i<n;i++)
-   {xor^=v[i];
-      x.push_back(xor);
-   }
-for(int i=0;i<x.size();i++){
-   if(x[i]==0){
-      
-   }
-}
-  
-   return 0;
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    string x;
+    cin >> x;
+    int k;
+    cin >> k;
+    int n = x.length();
+    int count = 0;
+    if (k >= n) {
+      cout << 0 << endl;
+      continue;
+    }
+    for (int i = 0; i < n; i++) {
+      if (x[i] != '0' && count < k) {
+        x.erase(x.begin() + i);
+        count++;
+      }
+    }
+    while (x.length() > 1 && x[0] == '0' && count < k) {
+      x.erase(x.begin());
+      count++;
+    }
+    if (x.length() == 1 && x[0] == '0') {
+      cout << 0 << endl;
+    } else {
+      cout << x << endl;
+    }
+  }
+  return 0;
 }
